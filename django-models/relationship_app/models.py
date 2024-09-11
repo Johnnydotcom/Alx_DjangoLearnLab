@@ -2,7 +2,12 @@ from django.db import models
 
 # Create your models here.
 class Author(models.Model):
-    name = models.CharField(max_length=100)
+    def __init__(self, title, author):
+        self.name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
+    #name = models.CharField(max_length=100)
+    
     
 class Book(models.Model):
     title = models.CharField(max_length=100)
