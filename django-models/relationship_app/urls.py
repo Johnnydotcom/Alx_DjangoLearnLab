@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('relationship_app/', list_books, name='list_books'),
-    path('relationship_app/', LibraryDetailView.as_view(), name='library_detail'),  # Use LibraryDetailView
+    path('relationship_app/', LibraryDetailView.as_view(), name='library_detail'),
 ]
