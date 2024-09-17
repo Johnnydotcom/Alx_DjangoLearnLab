@@ -25,7 +25,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')  # Adjust 'home' to your desired redirect URL
+            return redirect('login') 
     else:
         form = UserCreationForm()
     return render(request, 'registration_app/register.html', {'form': form})
