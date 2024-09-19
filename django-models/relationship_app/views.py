@@ -3,7 +3,7 @@ from django.shortcuts import render
 from .models import Book
 from .models import Library
 from django.views.generic.detail import DetailView
-from django.views.generic import DetailView
+#from django.views.generic import DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import user_passes_test
@@ -31,6 +31,8 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'registration_app/register.html', {'form': form})
+
+@user_passes_test
 
 def is_admin(user):
     return user.is_authenticated and hasattr(user, 'profile') and user.profile.role == 'Admin'
