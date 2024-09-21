@@ -1,5 +1,5 @@
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Book
 from .models import Library
 from django.views.generic.detail import DetailView
@@ -42,7 +42,7 @@ def register(request):
 @login_required
 @user_passes_test(is_admin)
 def admin_view(request):
-    if request.user.is_authenticated and request.user.groups.filter(name='Admin').exists():
+    if request.user.is_authenticated and request.user.is_staff:
         return render(request, 'relationship_app/admin.html')
 
 @login_required
