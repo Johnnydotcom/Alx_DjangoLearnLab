@@ -39,21 +39,47 @@ def register(request):
 # def is_member(user):
 #     return user.is_authenticated and hasattr(user, 'profile') and user.profile.role == 'Member'
 
+# @login_required
+# @user_passes_test(is_admin)
+# def admin_view(request):
+#     if request.user.is_authenticated and request.user.is_staff:
+#         return render(request, 'relationship_app/admin.html')
+
+# @login_required
+# @user_passes_test(is_librarian)
+# def librarian_view(request):
+#     if request.user.is_authenticated and request.user.groups.filter(name='Librarians').exists():
+#         return render(request, 'relationship_app/librarian.html')
+
+# @login_required
+# @user_passes_test(is_member)
+# def member_view(request):
+#     if request.user.is_authenticated and request.user.groups.filter(name='Member').exists():
+#         return render(request, 'relationship_app/member.html')
+
+def is_admin(user):
+    return user.is_authenticated and user.is_staff  # Admins are staff
+
+def is_librarian(user):
+    return user.is_authenticated and user.groups.filter(name='Librarian').exists()
+
+def is_member(user):
+    return user.is_authenticated and user.groups.filter(name='Member').exists()
+
+# Admin View
 @login_required
 @user_passes_test(is_admin)
 def admin_view(request):
-    if request.user.is_authenticated and request.user.is_staff:
-        return render(request, 'relationship_app/admin.html')
+    return render(request, 'admin.html')  # Admin-specific content
 
+# Librarian View
 @login_required
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    if request.user.is_authenticated and request.user.groups.filter(name='Librarians').exists():
-        return render(request, 'relationship_app/librarian.html')
+    return render(request, 'librarian.html')  # Librarian-specific content
 
+# Member View
 @login_required
 @user_passes_test(is_member)
 def member_view(request):
-    if request.user.is_authenticated and request.user.groups.filter(name='Member').exists():
-        return render(request, 'relationship_app/member.html')
-
+    return render(request, 'member.html')
