@@ -30,7 +30,7 @@ def register(request):
             return redirect('relationship_app/register.html') 
     else:
         form = UserCreationForm()
-    return render(request, 'registration_app/register.html', {'form': form})
+    return render(request, 'relationship_app/register.html', {'form': form})
 
 def is_admin(user):
     return user.is_authenticated and hasattr(user, 'profile') and user.profile.role == 'Admin'
@@ -42,15 +42,18 @@ def is_member(user):
 @login_required
 @user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'admin/dashboard.html')
+    if request.user.is_authenticated and request.user.groups.filter(name='Admin').exists():
+        return render(request, 'relationship_app/admin.html')
 
 @login_required
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'librarian/dashboard.html')
+    if request.user.is_authenticated and request.user.groups.filter(name='Librarians').exists():
+        return render(request, 'relationship_app/librarian.html')
 
 @login_required
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'member/dashboard.html')
+    if request.user.is_authenticated and request.user.groups.filter(name='Member').exists():
+        return render(request, 'relationship_app/member.html')
 
