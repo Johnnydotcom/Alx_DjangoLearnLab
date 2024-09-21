@@ -58,7 +58,7 @@ def register(request):
 #         return render(request, 'relationship_app/member.html')
 
 def is_admin(user):
-    return user.is_authenticated and user.is_superuser
+    return user.is_authenticated and user.groups.filter(name='Admin').exists()
 
 def is_librarian(user):
     return user.is_authenticated and user.groups.filter(name='Librarian').exists()
