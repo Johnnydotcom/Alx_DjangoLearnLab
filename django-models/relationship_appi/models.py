@@ -23,18 +23,11 @@ class Librarian(models.Model):
     
 class Admin(models.Model):
     name = models.CharField(max_length=100)
-    admin = models.OneToOneField('self', on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.name
+    #admin = models.OneToOneField(Admin, on_delete=models.CASCADE)
     
 class Member(models.Model):
     name = models.CharField(max_length=100)
-    member = models.OneToOneField('self', on_delete=models.CASCADE)
-    
-    def __str__(self):
-        return self.name
-    
+    #member = models.OneToOneField(Member, on_delete=models.CASCADE)
 # class UserProfile(models.Model):
 #     username = models.CharField(max_length=50)
     

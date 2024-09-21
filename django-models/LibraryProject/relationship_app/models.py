@@ -20,3 +20,30 @@ class Library(models.Model):
 class Librarian(models.Model):
     name = models.CharField(max_length=100)
     library = models.OneToOneField(Library, on_delete=models.CASCADE)
+    
+class Admin(models.Model):
+    name = models.CharField(max_length=100)
+    admin = models.OneToOneField('self', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+    
+class Member(models.Model):
+    name = models.CharField(max_length=100)
+    member = models.OneToOneField('self', on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.name
+    
+# class UserProfile(models.Model):
+#     username = models.CharField(max_length=50)
+    
+#       def __str__(self):
+#         return self.username
+    
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     role = models.CharField(max_length=50)
+    
+#     def __str__(self):
+# return f"{self.user.username} - {self.role}"
