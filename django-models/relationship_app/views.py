@@ -68,21 +68,21 @@ def is_member(user):
 
 # Admin View
 @login_required
-@role_required(allowed_roles=['admin'])
+
 @user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'relationship_app/admin.html')  # Admin-specific content
+    return render(request, 'admin.html')  # Admin-specific content
 
 # Librarian View
 @login_required
-@role_required(allowed_roles=['librarian'])
+
 @user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'relationship_app/librarian.html')  # Librarian-specific content
+    return render(request, 'librarian.html')  # Librarian-specific content
 
 # Member View
 @login_required
-@role_required(allowed_roles=['member'])
+
 @user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'relationship_app/member.html')
+    return render(request, 'member.html')
