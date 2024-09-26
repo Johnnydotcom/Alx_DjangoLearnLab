@@ -68,27 +68,18 @@ def is_member(user):
 
 # Admin View
 @login_required
-@user_passes_test(is_admin, login_url='admin_redirect')
+@user_passes_test(is_admin)
 def admin_view(request):
-    return render(request, 'relationship_app/admin.html'{})  # Admin-specific content
+    return render(request, 'relationship_app/admin.html')  # Admin-specific content
 
 # Librarian View
 @login_required
-@user_passes_test(is_librarian, login_url='librarian_redirect')
+@user_passes_test(is_librarian)
 def librarian_view(request):
-    return render(request, 'relationship_app/librarian.html'{})  # Librarian-specific content
+    return render(request, 'relationship_app/librarian.html')  # Librarian-specific content
 
 # Member View
 @login_required
-@user_passes_test(is_member, login_url='member_redirect')
+@user_passes_test(is_member)
 def member_view(request):
-    return render(request, 'relationship_app/member.html'{})
-
-def admin_redirect(request):
-    return redirect('login')
-
-def librarian_redirect(request):
-    return redirect('login')
-
-def member_redirect(request):
-    return redirect('login')
+    return render(request, 'relationship_app/member.html')
