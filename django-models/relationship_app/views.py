@@ -66,6 +66,15 @@ def is_librarian(user):
 def is_member(user):
     return user.is_authenticated and user.groups.filter(name='Member').exists()
 
+def admin_redirect(request):
+    return redirect('home')
+
+def librarian_redirect(request):
+    return redirect('home')
+
+def member_redirect(request):
+    return redirect('home')
+
 # Admin View
 @login_required
 @user_passes_test(is_admin, login_url='admin_redirect')
