@@ -58,13 +58,16 @@ def register(request):
 #         return render(request, 'relationship_app/member.html')
 
 def is_admin(user):
-    return user.is_authenticated and user.groups.filter(name='Admin').exists()
+    #return user.is_authenticated and user.groups.filter(name='Admin').exists()
+    return user.is_authenticated and user.userprofile.role == 'Admin'
 
 def is_librarian(user):
-    return user.is_authenticated and user.groups.filter(name='Librarian').exists()
+   # return user.is_authenticated and user.groups.filter(name='Librarian').exists()
+   return user.is_authenticated and user.userprofile.role == 'Librarian'
 
 def is_member(user):
-    return user.is_authenticated and user.groups.filter(name='Member').exists()
+   # return user.is_authenticated and user.groups.filter(name='Member').exists()
+   return user.is_authenticated and user.userprofile.role == 'Member'
 
 # Admin View
 @login_required
