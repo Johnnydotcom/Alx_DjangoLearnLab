@@ -46,5 +46,24 @@ class UserProfile(models.Model):
     @receiver(post_save, sender=User)
     def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
+    
+    @receiver(post_save, sender=UserProfile)
+def assign_permissions(sender, instance, created, **kwargs):
+    if created:
+        user = instance.user
+        if instance.role == 'Admin':
+            user.user_permissions.add(
+                Permission.objects.get(codename='can_add_book'),
+                Permission.objects.get(codename='can_change_book'),
+                Permission.objects.get(codename='can_delete_book'),
+            )
+        elif instance.role == 'Librarian':
+            user.user_permissions.add(
+                Permission.objects.get(codename='can_add_book'),
+                Permission.objects.get(codename='can_change_book'),
+            )
+        elif instance.role == 'Member':
+            # Typically, Members wouldn't have book permissions
+            pass
 
     
