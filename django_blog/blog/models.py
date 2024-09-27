@@ -7,3 +7,10 @@ class Post(models.Model):
     content = models.TextField()
     published_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey
+
+class Comment(models.Model):
+    post = models.ForeignKey
+    author = models.ForeignKey
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now_add=True)
