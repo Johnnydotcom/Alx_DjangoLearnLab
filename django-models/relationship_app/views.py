@@ -90,3 +90,30 @@ def librarian_view(request):
 @user_passes_test(is_member)
 def member_view(request):
     return render(request, 'member.html')
+
+@permission_required('relationship_app.can_add_book')
+def add_book(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        author = request.POST['author']
+        Book.objects.create(title=title, author=author)
+        return redirect('book_list')  # Replace with your actual book list view
+    return render(request, 'add_book.html')
+
+@permission_required('relationship_app.can_change_book')
+def change_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        book.title = request.POST['title']
+        book.author = request.POST['author']
+        book.save()
+        return redirect('book_list')  # Replace with your actual book list view
+    return render(request, 'change_book.html', {'book': book})
+
+@permission_required('relationship_app.can_delete_book')
+def delete_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    if request.method == "POST":
+        book.delete()
+        return redirect('book_list')  # Replace with your actual book list view
+    return render(request, 'delete_book.html', {'book': book})

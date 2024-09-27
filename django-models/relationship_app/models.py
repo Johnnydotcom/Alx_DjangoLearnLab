@@ -21,6 +21,9 @@ class Book(models.Model):
             ('can_change_book', 'Can change book'),
             ('can_delete_book', 'Can delete book'),
         ]
+        
+    def __str__(self):
+        return self.title
     
 class Library(models.Model):
     name = models.CharField(max_length=100)
@@ -47,23 +50,6 @@ class UserProfile(models.Model):
     def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
     
-    @receiver(post_save, sender=UserProfile)
-def assign_permissions(sender, instance, created, **kwargs):
-    if created:
-        user = instance.user
-        if instance.role == 'Admin':
-            user.user_permissions.add(
-                Permission.objects.get(codename='can_add_book'),
-                Permission.objects.get(codename='can_change_book'),
-                Permission.objects.get(codename='can_delete_book'),
-            )
-        elif instance.role == 'Librarian':
-            user.user_permissions.add(
-                Permission.objects.get(codename='can_add_book'),
-                Permission.objects.get(codename='can_change_book'),
-            )
-        elif instance.role == 'Member':
-            # Typically, Members wouldn't have book permissions
-            pass
+    
 
     
