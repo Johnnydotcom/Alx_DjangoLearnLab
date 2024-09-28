@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import DeleteView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
 def login_view(request):
@@ -22,7 +23,7 @@ def register_view(request):
 def profile_view(request):
     return render(request, 'profile.html')
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'update.html' 
     fields = ['title', 'content']
@@ -37,7 +38,7 @@ class PostDetailView(DetailView):
     template_name = 'detail.html'
     context_object_name = 'post'
     
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'delete.html'
     #success_url = reverse_lazy('listlist')
