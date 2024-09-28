@@ -35,7 +35,7 @@ class PostCreateView(CreateView):
     
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'detail.html'
+    template_name = 'view.html'
     context_object_name = 'post'
     
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
