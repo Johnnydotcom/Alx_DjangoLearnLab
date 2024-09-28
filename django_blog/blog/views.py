@@ -47,3 +47,17 @@ class PostListView(ListView):
     model = Post
     template_name = 'list.html'
     context_object_name = 'posts'
+    
+class CommentCreateView(CreateView):
+    model = Comment
+    template_name = 'comment-create.html'
+    fields = ['content']
+    
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    template_name = 'comment-edit.html' 
+    fields = ['content']
+    
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'comment-delete.html'
