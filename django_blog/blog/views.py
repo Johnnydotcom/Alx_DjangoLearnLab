@@ -25,7 +25,7 @@ def profile_view(request):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    template_name = 'update.html' 
+    template_name = 'edit.html' 
     fields = ['title', 'content']
     
 class PostCreateView(CreateView):
