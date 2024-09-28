@@ -29,15 +29,20 @@ class PostUpdateView(UpdateView):
     
 class PostCreateView(CreateView):
     model = Post
-    template_name = 'create.html'   # Template for creating a post
+    template_name = 'create.html'
     fields = ['title', 'content']
     
 class PostDetailView(DetailView):
     model = Post
-    template_name = 'detail.html'  # Template for a single post
+    template_name = 'detail.html'
     context_object_name = 'post'
     
 class PostDeleteView(DeleteView):
     model = Post
-    template_name = 'delete.html'  # Template for delete confirmation
-    success_url = reverse_lazy('post-list')
+    template_name = 'delete.html'
+    #success_url = reverse_lazy('listlist')
+    
+class PostListView(ListView):
+    model = Post
+    template_name = 'list.html'
+    context_object_name = 'posts'
