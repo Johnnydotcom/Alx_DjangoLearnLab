@@ -4,7 +4,7 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'tag']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
